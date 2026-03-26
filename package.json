@@ -1,0 +1,20 @@
+{
+  "name": "@jav-web/audit",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "audit:dev": "bun src/index.ts dev",
+    "audit:dist": "bun src/index.ts dist"
+  },
+  "dependencies": {
+    "axe-core": "^4.11.1",
+    "citty": "^0.2.1",
+    "jsdom": "^29.0.1"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.0",
+    "@types/jsdom": "^21.1.7",
+    "playwright": "^1.49.0",
+    "typescript": "^5.7.0"
+  }
+}
