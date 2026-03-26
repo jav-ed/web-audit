@@ -2,7 +2,7 @@ import { defineCommand } from 'citty'
 import { existsSync } from 'node:fs'
 import { auditDev } from '../auditors/dev.ts'
 import { printTerminal } from '../reporter/terminal.ts'
-import { writeJson } from '../reporter/json.ts'
+import { writeJson, writePagesList } from '../reporter/json.ts'
 import { discoverFromDist } from '../discovery/from-dist.ts'
 import { discoverFromConfig } from '../discovery/from-config.ts'
 import { meetsThreshold } from '../utils/wcag.ts'
@@ -58,6 +58,7 @@ export const devCommand = defineCommand({
 
     if (args.output) {
       await writeJson('dev', args.url, pages, args.output)
+      await writePagesList('dev', args.url, pages, args.output)
       console.log(`JSON report written to ${args.output}`)
     }
 

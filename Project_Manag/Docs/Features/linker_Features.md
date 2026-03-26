@@ -19,7 +19,10 @@ What the tool does and what is still open.
 
 ### Output
 - **Terminal** — violations sorted critical→minor, grouped by page, max 3 nodes shown per violation, summary line
-- **JSON** (`--output path`) — full report with summary + per-page violations, output directory auto-created
+- **JSON** (`--output path`) — always writes two files:
+  - `<name>.json` — violations-only (clean pages excluded), nodes capped at 5 per violation (`totalNodes` field preserves full count), `html` truncated at 200 chars (`target` CSS selector kept intact for element identification)
+  - `<name>.pages.json` — flat list of all inspected pages, for verifying discovery coverage
+  - Agent convention: read `.json` first; open `.pages.json` only to verify coverage
 
 ### CI
 - `--min-impact` flag (default: `serious`) — exits 1 if any violation meets or exceeds that level

@@ -1,4 +1,3 @@
-import { readFile } from 'node:fs/promises'
 import { relative, resolve } from 'node:path'
 import { JSDOM, VirtualConsole } from 'jsdom'
 import axe from 'axe-core'
@@ -29,7 +28,8 @@ function mapViolations(axeViolations: any[]): Violation[] {
 }
 
 async function auditFile(htmlPath: string, tags: string[], absDistDir: string): Promise<PageResult> {
-  const html = await readFile(htmlPath, 'utf-8')
+  // Bun.file() is the native file reader — faster than node:fs/promises readFile
+  const html = await Bun.file(htmlPath).text()
 
   // Suppress jsdom noise — we only care about DOM structure, not missing resources or CSS
   const virtualConsole = new VirtualConsole()

@@ -38,7 +38,7 @@ bun src/index.ts dist ./dist
 | Dev browser | Playwright |
 | Axe (dev) | `@axe-core/playwright` AxeBuilder |
 | HTML parsing (dist) | jsdom |
-| Axe (dist) | `axe-core` browser bundle injected into jsdom window |
+| Axe (dist) | `axe-core` Node.js API — `axe.setup()` / `axe.run()` / `axe.teardown()` |
 | Terminal output | Custom reporter — existing formatters are unmaintained |
 
 ## Code Map
@@ -54,6 +54,7 @@ src/
   commands/
     dev.ts              CLI args/flags for dev mode — wires discovery + auditor + reporters + exit code
     dist.ts             CLI args/flags for dist mode — same pattern as dev.ts
+    report.ts           CLI args/flags for report mode — reads saved JSON, filters by impact + --top N, prints terminal output
 
   auditors/
     dev.ts              Playwright + AxeBuilder loop — launches browser, visits each URL, collects results
@@ -66,10 +67,11 @@ src/
 
   reporter/
     terminal.ts         ANSI output — violations sorted critical→minor, grouped by page, summary line
-    json.ts             JSON report writer — creates output directory if needed, writes full report structure
+    json.ts             JSON report writer — violations-only main report + pages list file (.pages.json),
+                        nodes capped at 5, html truncated at 200 chars, output dir auto-created
 
   utils/
-    walk.ts             Async generator yielding absolute .html file paths recursively
+    walk.ts             Async generator using Bun.Glob — yields absolute .html file paths recursively
     wcag.ts             WCAG tag builder (wcagTags) + impact threshold comparison (meetsThreshold)
 ```
 
@@ -83,7 +85,7 @@ Dev mode:
 
 Dist mode:
   CLI args → utils/walk.ts → string[] of HTML file paths
-           → auditors/dist.ts → jsdom + axe injection → axe.run() per file
+           → auditors/dist.ts → jsdom + axe.setup()/run()/teardown() per file
            → PageResult[] → reporter/terminal.ts + reporter/json.ts
 ```
 

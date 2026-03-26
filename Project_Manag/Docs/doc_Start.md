@@ -11,4 +11,5 @@ Entry point: `src/index.ts`
 - [Features](Features/linker_Features.md) — what each mode does, output format, open feature requests
 - [Decisions](Decisions/decisions.md) — why Bun/TS, axe-core, jsdom for dist, pages.ts over pages.json, --min-impact design
 - [Live Working](../Live_Working/live.md) — implementation status, known issues, next steps
+- [Learnings](Learnings/learnings.md) — gotchas discovered during development (axe-core + Bun, jsdom quirks)
 - [Dependency docs](Investigation/linker_Deps.md) — local clones of axe-core, @axe-core/playwright, jsdom, Playwright with direct links to relevant doc files

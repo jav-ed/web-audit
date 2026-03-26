@@ -1,7 +1,7 @@
 import { defineCommand } from 'citty'
 import { auditDist } from '../auditors/dist.ts'
 import { printTerminal } from '../reporter/terminal.ts'
-import { writeJson } from '../reporter/json.ts'
+import { writeJson, writePagesList } from '../reporter/json.ts'
 import { meetsThreshold } from '../utils/wcag.ts'
 import type { Impact } from '../types.ts'
 
@@ -39,6 +39,7 @@ export const distCommand = defineCommand({
 
     if (args.output) {
       await writeJson('dist', args.path, pages, args.output)
+      await writePagesList('dist', args.path, pages, args.output)
       console.log(`JSON report written to ${args.output}`)
     }
 

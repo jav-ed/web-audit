@@ -2,6 +2,9 @@
   "name": "@jav-web/audit",
   "version": "0.1.0",
   "private": true,
+  "bin": {
+    "audit": "src/index.ts"
+  },
   "scripts": {
     "audit:dev": "bun src/index.ts dev",
     "audit:dist": "bun src/index.ts dist"
