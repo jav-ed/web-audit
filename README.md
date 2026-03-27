@@ -53,6 +53,25 @@ The agent will navigate to the relevant doc, read only what it needs, and answer
 
 ---
 
+## Agent integration
+
+The skill file lives in `.agents/skills/audit/` — this is the single source of truth. To wire it into your agent tool, symlink from wherever that tool expects skills rather than copying.
+
+### Claude Code
+
+```bash
+mkdir -p .claude
+ln -s ../.agents/skills .claude/skills
+```
+
+Claude Code picks up skills from `.claude/skills/`. The symlink points back to `.agents/skills/`, so there is no duplication — one folder, two entry points.
+
+The `.claude/` directory is tracked in git. `.claude/skills` is listed in `.gitignore` so the symlink itself is not committed (the skills are already tracked under `.agents/`).
+
+Other agent tools that support a skills or prompts directory can be wired up the same way — just symlink from their expected path into `.agents/skills/`.
+
+---
+
 ## Install
 
 **Requires [Bun](https://bun.sh).**
