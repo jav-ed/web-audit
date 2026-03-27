@@ -6,6 +6,6 @@ Entry point(s): list the key files an agent would need to know to orient in the 
 
 ## Docs
 
-- [Area name](Area/linker_Area.md) — describe what kinds of tasks or questions belong here, specific enough that an agent can decide without clicking
-- [Area name](Area/linker_Area.md) — same
-- [Specific doc if area is small](Area/doc.md) — same
+- [Area name](Project_Manag/Docs/Area/linker_Area.md) — describe what kinds of tasks or questions belong here, specific enough that an agent can decide without clicking
+- [Area name](Project_Manag/Docs/Area/linker_Area.md) — same
+- [Specific doc if area is small](Project_Manag/Docs/Area/doc.md) — same
